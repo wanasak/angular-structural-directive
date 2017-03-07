@@ -16,12 +16,39 @@
 <hr>
 <h3>Why remove rather than hide?</h3>
 <ul>
-    <li>cons - it keeps listening to event. Angular keeps checking for chages</li>
-    <li>pros - showing the element again is quick</li>
+  <li>cons - it keeps listening to event. Angular keeps checking for chages</li>
+  <li>pros - showing the element again is quick</li>
 </ul>
 <p [style.display]="'block'">
-    This paragraph is visible.
+  This paragraph is visible.
 </p>
 <p [style.display]="'none'">
-    This paragraph is hidden but still in the DOM.
+  This paragraph is hidden but still in the DOM.
 </p>
+<hr>
+<h3>Group sibling elements with 'ng-container'</h3>
+<ul>
+    <li>there's often a root element can anh should host the structural directive</li>
+    <li>the grouping element may break the template appearance because css styles neither expect nor accommodate the new layout</li>
+    <li>some html elements require all immediate children such as 'select'</li>
+</ul>
+<div *ngIf="hero" >{{hero.name}}</div>
+
+<p>
+  I turned the corner
+  <span *ngIf="hero">
+    and saw {{hero.name}}. I waved
+  </span> and continued on my way.
+</p>
+
+<div>
+  Pick your favorite hero (
+  <label><input type="checkbox" checked (change)="showSad = !showSad">show sad</label>)
+</div>
+<select [(ngModel)]="hero">
+  <span *ngFor="let h of heroes">
+    <span *ngIf="showSad || h.emotion !== 'sad'">
+      <option [ngValue]="h">{{h.name}} ({{h.emotion}})</option>
+    </span>
+  </span>
+</select>
