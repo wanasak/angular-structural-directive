@@ -13,4 +13,15 @@
 <p *ngIf="false">
   Please hide me
 </p>
-
+<hr>
+<h3>Why remove rather than hide?</h3>
+<ul>
+    <li>cons - it keeps listening to event. Angular keeps checking for chages</li>
+    <li>pros - showing the element again is quick</li>
+</ul>
+<p [style.display]="'block'">
+    This paragraph is visible.
+</p>
+<p [style.display]="'none'">
+    This paragraph is hidden but still in the DOM.
+</p>
