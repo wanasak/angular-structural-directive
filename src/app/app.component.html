@@ -77,3 +77,13 @@
         </ng-container>
     </ng-container>
 </select>
+<hr>
+<h3>The asterisk (*) prefix</h3>
+<div *ngIf="hero" >{{hero.name}}</div>
+<!--it translates the *ngIf="..." into a template attribute, template="ngIf ..."-->
+<div template="ngIf hero">{{hero.name}}</div>
+<!--then it translates the template attribute into a template element-->
+<template [ngIf]="hero">
+  <div>{{hero.name}}</div>
+</template>
+
