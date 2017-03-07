@@ -28,11 +28,11 @@
 <hr>
 <h3>Group sibling elements with 'ng-container'</h3>
 <ul>
-    <li>there's often a root element can anh should host the structural directive</li>
-    <li>the grouping element may break the template appearance because css styles neither expect nor accommodate the new layout</li>
-    <li>some html elements require all immediate children such as 'select'</li>
+  <li>there's often a root element can anh should host the structural directive</li>
+  <li>the grouping element may break the template appearance because css styles neither expect nor accommodate the new layout</li>
+  <li>some html elements require all immediate children such as 'select'</li>
 </ul>
-<div *ngIf="hero" >{{hero.name}}</div>
+<div *ngIf="hero">{{hero.name}}</div>
 
 <p>
   I turned the corner
@@ -40,7 +40,7 @@
     and saw {{hero.name}}. I waved
   </span> and continued on my way.
 </p>
-
+<!--immediate children-->
 <div>
   Pick your favorite hero (
   <label><input type="checkbox" checked (change)="showSad = !showSad">show sad</label>)
@@ -51,4 +51,29 @@
       <option [ngValue]="h">{{h.name}} ({{h.emotion}})</option>
     </span>
   </span>
+</select>
+<hr>
+<h3>&lt;ng-container&gt; to the rescue</h3>
+<ul>
+  <li>&lt;ng-container&gt; is a grouping element that does not interfere styles or layout</li>
+</ul>
+
+<p>
+  I tured the corner
+  <ng-container *ngIf="hero">
+    and saw {{ hero.name }}. I waved
+  </ng-container>
+  and continued on my way.
+</p>
+<!--immediate children-->
+<div>
+  Pick your favorite hero (
+  <label><input type="checkbox" checked (change)="showSad = !showSad">not sad</label>)
+</div>
+<select [(ngModel)]="hero">
+    <ng-container *ngFor="let hero of heroes">
+        <ng-container *ngIf="showSad || hero.emotion !== 'sad'">
+            <option [ngValue]="hero">{{ hero.name }} ({{ hero.emotion }})</option>
+        </ng-container>
+    </ng-container>
 </select>
