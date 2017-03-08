@@ -1,1 +1,6 @@
 p span { color: red; font-size: 70%; }
+
+.odd {
+    background-color: green;
+    color: white;
+}

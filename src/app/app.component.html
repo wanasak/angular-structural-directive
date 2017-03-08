@@ -86,4 +86,29 @@
 <template [ngIf]="hero">
   <div>{{hero.name}}</div>
 </template>
+<hr>
+<h3>Inside *ngFor</h3>
+<ul>
+  <li>ngFor directive has more features, both required and optional. these features in the string assigned to ngFor (Angular's microsyntax)</li>
+  <li>microsyntax parser translates that string into attributes on the &lt;template&gt;</li>
+</ul>
+<div *ngFor="let hero of heroes; let i=index; let odd=odd; trackBy: trackById" [class.odd]="odd">
+  ({{i}}) {{hero.name}}
+</div>
+
+<div template="ngFor let hero of heroes; let i=index; let odd=odd; trackBy: trackById" [class.odd]="odd">
+  ({{i}}) {{hero.name}}
+</div>
+
+<template ngFor let-hero [ngForOf]="heroes" let-i="index" let-odd="odd" [ngForTrackBy]="trackById">
+  <div [class.odd]="odd">({{i}}) {{hero.name}}</div>
+</template>
+<hr>
+<h3>Microsyntax</h3>
+<ul>
+  <li>the let keyword declare a template input variable that you reference within the template</li>
+  <li>takes of and trackBy, title-cases and prefixes them with ngFor, yielding the names ngForOf and ngForTrackBy.</li>
+  <li>as the ngFor loop through the list, it sets and resets properties. these properties include index and odd and $implicit</li>
+  <li>the let-hero wasn't specified. it's intended source is implicit.</li>
+</ul>
 
